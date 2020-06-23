@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div>
+    鄰居姓名：<input type="text" id="name">
+    鄰居貸款金額：<input type="number" id="money">
+    <button id="btn">送出</button>
+  </div>
+  <hr>
+  <div id="display">目前借貸人數 1</div>
+  <div id="displayTotal">目前借貸總金額 50000</div>
+  <ul id="loanList">
+  </ul>
+
+<script>
+  var loanPeopleArray = [
+    {
+      id: "0",
+      name: "jay",
+      loan: "50000"
+    }
+  ];
+var inputName = document.querySelector("#name");
+var inputLoan = document.querySelector("#money");
+var btn = document.querySelector("#btn");
+
+var display = document.querySelector("#display");
+var displayTotal = document.querySelector("#displayTotal");
+var loanList = document.querySelector("#loanList");
+//刪除
+var delBtn = document.querySelector("loanList");
+
+//增加事件
+btn.addEventListener('click',loan,false);
+  function loan(){
+    //建立物件存放資料
+    if(parseFloat(inputLoan.value) == 0){
+      alert("小明偏頭了偏頭看你，默默的看了一會兒後說 進門左邊第三個櫃子有你要的東西，拿了就別回來鎮裡了");
+    }else if(inputName.value !='' && parseFloat(inputLoan.value) == parseFloat(inputLoan.value)){
+      let obj ={};
+      obj.name = inputName.value;
+      obj.loan = inputLoan.value;
+      let moneyTotal = 0;
+      let str = '';
+      //迴圈存入
+      loanPeopleArray.push(obj);
+      loanPeopleArray.forEach(function(item,index){
+        moneyTotal += parseInt(item.loan);
+        str += `<li> 借款人: ${item.name}   借款金額: ${item.loan} <button id =${index} > 刪除 </button></li><hr>`;
+      });
+      display.textContent =`目前借貸人數 ${loanPeopleArray.length}`;
+      displayTotal.textContent = `目前借貸總金額 ${moneyTotal}`;
+      loanList.innerHTML = str;
+    }else{
+      alert(`親愛友好的鄰居朋友，再亂打小明要森7777惹`);
+    }
+
+  }
+
+  //刪除事件
+  loanList.addEventListener('click',deleteLoan,true);
+  function deleteLoan(e){
+    let delNo =parseInt(e.target.id); 
+    loanPeopleArray.splice(delNo,1);
+    let moneyTotal = 0;
+    let str = '';
+    //迴圈取值
+    loanPeopleArray.forEach(function(item,index){
+      index = index;
+      moneyTotal += parseInt(item.loan);
+      str += `<li> 借款人: ${item.name}   借款金額: ${item.loan} <button id =${index} > 刪除 </button></li><hr>`;
+    });
+    display.textContent =`目前借貸人數 ${loanPeopleArray.length}`;
+    displayTotal.textContent = `目前借貸總金額 ${moneyTotal}`;
+    loanList.innerHTML = str;
+  }
+  //forEach迴圈做了兩次有點多，應該可以再精簡一下的~
+  //禮拜五聽完老師講課，有融合一些進去，感覺老師講得真好，一個晚上抵得上我上網爬文翻書慢慢研究一個禮拜了．．．
+  //對JS比較熟悉了！！！
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a ={x:1};//0x01
+        var b = a;
+        a.y = a = {x:2};//同時執行，無分先後
+        //此時1. a = {x:2}是一個運算式
+        //此時a.y = a = {x:2}同時與上面一起執行
+        //a.y找得是"原本的"參考路徑
+        console.log(a.y);
+        console.log(b);
+        console.log(a===b.y);
+        //此時的a，定位到0x02
+        //b參考路徑0x01，b.y參考路徑0x02
+    </script>
+</body>
+</html>

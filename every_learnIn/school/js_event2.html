@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--古老做法-->
+    <!--不推薦，希望由JS去控制，很容易被XSS攻擊，可以串改點擊-->
+    <input onclick="alert('hello')" type="button" class="btn" value="點擊">
+
+    <input  type="button" class="btn" value="點擊">
+    <script src="./js/js_event2.js"></script>
+</body>
+</html>

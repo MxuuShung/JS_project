@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+  <div id="app" class="container my-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">待辦事項</span>
+      </div>
+      <input type="text" class="form-control" placeholder="準備要做的任務" id="newTodo">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="addTodo" >新增</button>
+      </div>
+    </div>
+    <div class="card text-center">
+      <ul class="list-group list-group-flush text-left" id="todoList">
+      </ul>
+      <div class="card-footer d-flex justify-content-between">
+        <span>還有 <span id="taskCount">0</span> 筆任務</span>
+        <a href="#" id="clearTask">清除所有任務</a>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+var todoData = [];
+    var input = document.querySelector("#newTodo");
+    var btn = document.querySelector("#addTodo");
+    var listClear = document.querySelector('#clearTask');
+    var todoList = document.querySelector("#todoList");
+    var count = document.querySelector('#taskCount');
+    
+    btn.addEventListener('click',updateData,false);
+    listClear.addEventListener('click',cleanAll,false);
+    todoList.addEventListener('click',deleteList,false);
+    
+    //更新資料
+function updateData() {
+  newTodo = input.value.trim();
+  if (newTodo !== '') {
+    todoData.push({
+      id: Math.floor(Date.now()),
+      title: newTodo,
+      completed: false,
+    });
+  }
+  render();
+  input.value = '';
+}
+
+
+
+//初始化
+function cleanAll (e) {
+  e.preventDefault();
+  todoData = [];
+  render();
+};
+//刪除
+function deleteList(e) {
+  var newIndex = 0;
+  if (e.target.dataset.action == 'remove') {
+    todoData.forEach(function (item, key) {
+      if (e.target.dataset.id == item.id) {
+        newIndex = key;
+      }
+    })
+    todoData.splice(newIndex, 1);
+    render();
+  }
+}
+function deleteList (e) {
+  let el =e.target.dataset;
+  if (el.action == 'complete') {
+    todoData.forEach(function (item) {
+      if (el.id == item.id) {
+        if (item.completed) {
+          item.completed = false;
+        } else {item.completed = true}
+      }
+    })
+    render();
+  }
+}
+
+//畫面渲染
+function render(){
+  var str = '';
+    todoData.forEach((item)=> {
+      str += `<li class="list-group-item">
+                <div class="d-flex">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" ${item.completed ? 'checked' : ''}
+                    data-action="complete" data-id="${item.id}">
+                    <label class="form-check-label ${item.completed ? 'completed' : ''}" 
+                    data-action="complete" data-id="${item.id}"> ${item.title}</label>
+                  </div>
+                  <button type="button" class="close ml-auto" aria-label="Close">
+                    <span aria-hidden="true" data-action="remove" data-id="${item.id}">&times;</span>
+                  </button>
+                </div>
+              </li>`;
+    })
+    list.innerHTML = str;
+    count.textContent = todoData.length;
+    input.value = '';
+  }
+</script>
+</body>
+</html>

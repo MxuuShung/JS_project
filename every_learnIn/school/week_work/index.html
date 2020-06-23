@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<style>
+  .completed {
+  text-decoration: line-through
+}
+</style>
+<body>
+  <div id="app" class="container my-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">待辦事項</span>
+      </div>
+      <input type="text" class="form-control" placeholder="準備要做的任務" id="inputTodo">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="addTodo" >新增</button>
+      </div>
+    </div>
+    <div class="card text-center">
+      <ul class="list-group list-group-flush text-left" id="todoList"></ul>
+      <div class="card-footer d-flex justify-content-between">
+        <span>還有 <span id="taskCount">0</span> 筆任務</span>
+        <a href="#" id="clearTask">清除所有任務</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    var data = []; 
+    var listCount = 0;
+    var input = document.querySelector("#inputTodo");
+    var btn = document.querySelector("#addTodo");
+    var list = document.querySelector("#todoList");
+    var count = document.querySelector('#taskCount');
+    var listClear = document.querySelector('#clearTask');
+
+    btn.addEventListener('click',updateData,false);
+    listClear.addEventListener('click',cleanALL,false);
+
+    //加入資料
+    function updateData(){
+      data.push({
+        text:input.value
+      });
+      render();
+    }
+
+    //移除資料
+    function removeData(e){
+      data.splice(e.target.id,1);
+      render();
+    }
+
+    //畫面渲染
+    function render() {
+      let string ='';
+      let listCount=0;
+      console.log(data);
+      data.forEach(function(item){
+        string +=`<li> <input type="checkbox" class="boxClick"> ${item.text}</del> <button class="delBtns">移除</button> </li>`
+      });
+      list.innerHTML = string;
+      //綁定移除事件
+      var delBtns = document.querySelectorAll(".delBtns");
+      var boxClick = document.querySelectorAll(".boxClick");
+      boxClick.forEach(function(box){
+        box.addEventListener('change',finishList,false);
+      });
+      delBtns.forEach(function(btn){
+        listCount++;
+        btn.addEventListener('click',removeData,false);
+      });
+      count.innerHTML = listCount;
+    }
+    render();
+
+    function finishList(e){
+      console.log(e);
+    }
+
+    //初始化陣列
+    function cleanALL(){
+      data = [];
+    }
+  </script>
+</body>
+</html>

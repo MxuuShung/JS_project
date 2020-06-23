@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--物件取值、新增、刪除-->
+    <script>
+        var family = {
+            //屬性名稱:值,
+            //property:value,
+            name:'小名家',
+            deposit:1000,
+            members:{
+                mom:'老媽',
+                ming:'小名'
+            },
+            1:'1',
+                    //因為是字串的關係，可以取特殊名子
+            '$-小':'$-小 string',
+            callFamily:function(){
+                console.log('聯絡小名家');
+            },//可以逗號可以不逗號
+        }
+        console.log(family);
+        //取值
+        console.log(family.name);
+        console.log(family.members.mom);
+        console.log(family['name']);
+        //差異，[]取值，可以用字串，也可以用變數
+        var a = 'name';
+        console.log(family.a);
+        console.log(family.1);//失敗，因為屬性值一律是字串
+        //修改程
+        console.log(family[1]);
+        console.log(family['$-小']);
+        //執行函式
+        family.callFamily();
+        family['callFamily']();
+
+        //增加屬性
+        family.dog = '小白';
+        console.log(family);
+        //利用中括號
+        family['kitten'] = '小貓';
+        console.log(family);
+        //因為是字串，可以新增特殊符號
+        family['$'] = 'money';
+
+        //刪除delete
+        delete family.deposit;
+        console.log(family);//刪除 存款的屬性，值都會被刪除
+        delete family['$'];
+        console.log(family);
+    </script>
+</body>
+</html>

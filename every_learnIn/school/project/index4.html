@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="display"></div>
+<div>
+  <button class="number">0</button>
+  <button class="number">1</button>
+  <button class="number">2</button>
+  <button class="number">3</button>
+  <button class="number">4</button>
+  <button class="number">5</button>
+  <button class="number">6</button>
+  <button class="number">7</button>
+  <button class="number">8</button>
+  <button class="number">9</button>
+</div>
+<div>
+  <button class="operation">+</button>
+  <button class="operation">-</button>
+  <button class="operation">*</button>
+  <button class="operation">/</button>
+</div>
+<button id="answer">Answer</button>
+
+<script>
+let firstNum = "";
+let secondNum = "";
+let operation = "";
+let display = document.querySelector("#display");
+
+let numberList = document.querySelectorAll(".number");
+numberList.forEach(function (item) {
+  item.addEventListener("click", addNum);
+});
+
+let operationList = document.querySelectorAll(".operation");
+operationList.forEach(function (item) {
+  item.addEventListener("click", addOpt);
+});
+
+let answerBtn = document.querySelector("#answer");
+answerBtn.addEventListener("click", count);
+
+function addNum(e) {
+  let num = e.target.textContent;
+
+  if (!operation) {
+    firstNum += num;
+  } else {
+    secondNum += num;
+  }
+  let str = `${firstNum}${operation}${secondNum}`;
+  display.innerHTML = str;
+  console.log(firstNum);
+  console.log(operation);
+  console.log(secondNum);
+}
+
+function addOpt(e) {
+  let Opt = e.target.textContent;
+  operation += Opt;
+}
+
+// 計算結果後清除第一組、第二組、運算符號的變數內容
+// eval()可以直接計算字串內的算式
+function count() {
+  display.textContent = eval(display.textContent);
+  firstNum = "";
+  secondNum = "";
+  operation = "";
+}
+
+</script>
+</body>
+</html>

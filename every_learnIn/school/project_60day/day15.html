@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .blue{
+  color: blue;
+}
+.orange{
+  color: orange;
+}
+.pinkDeep{
+  color:#86365a;
+}
+.pink{
+  color: #F04692;
+}
+.redDeep{
+  color: rgb(255, 51, 0);
+}
+.red{
+  color: red;
+}
+</style>
+<body>
+  <input type="text" class="height" placeholder="請輸入您的身高(公分)">
+  <input type="text" class="kg" placeholder="請輸入您的體重(公斤)">
+  <input type="button" class="send" value="計算">
+  <p class="total">您的 BMI 指數為 
+  <span class="BMI">22</span>，
+  狀態是 <span class="status">正常</span></p>
+
+
+<script>
+var height = document.querySelector('.height');
+var kg = document.querySelector('.kg');
+var send = document.querySelector('.send');
+var bmiDOM = document.querySelector('.BMI');
+var statusDOM = document.querySelector('.status');
+
+var BMIData = {
+    "overThin":{
+        class:"blue",
+        statusText:"體重過輕"
+    },
+    "normal":{
+        class:"orange",
+        statusText: "正常"
+    },
+    "fat":{
+      class:"pinkDeep",
+      statusText: "過重",
+    },
+    "mildObesity":{
+      class:"pink",
+      statusText: "輕度肥胖",
+    },
+    "moderateObesity":{
+      class:"redDeep",
+      statusText: "中度肥胖",
+    },
+    "severeObesity":{
+      class:"red",
+      statusText: "重度肥胖",
+    },
+
+}
+function calculationBMI(){
+    var thisHeight = parseInt(height.value);
+    var thisKg = parseInt(kg.value);
+    var bmi = thisKg / (thisHeight / 100 * thisHeight / 100)
+    if(bmi < 18.5){
+    render("overThin",bmi)
+    }else if(bmi < 24){
+      render("normal",bmi)
+    }else if(bmi < 27){
+      render("fat",bmi)
+    }else if(bmi < 30){
+      render("mildObesity",bmi)
+    }else if(bmi < 35){
+      render("moderateObesity",bmi)
+    }else {
+      render("severeObesity",bmi)
+    }
+}
+function render(status,bmiText){
+  statusDOM.classList.remove(BMIData[status].class);
+    bmiDOM.textContent = bmiText;
+    statusDOM.textContent = BMIData[status].statusText;
+    statusDOM.classList.add(BMIData[status].class);
+    console.log(statusDOM.classList);
+}
+send.addEventListener("click",function(){ 
+    calculationBMI();
+},false)
+
+</script>
+
+</body>
+</html>

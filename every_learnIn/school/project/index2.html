@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    <input type="number" id="input"> 鄰居的貸款金額
+    <button id="submit">送出</button>
+
+    <div>貸款結果：<span id="result"></span></div>
+    <ul>
+<li>一年期：<span id="oneYear"></span></li>
+        <li>二年期：<span id="twoYears"></span></li>
+        <li>三年期：<span id="threeYears"></span></li>
+    </ul>
+    <button id="loanBtn">鄰居決定貸款</button>
+    <hr>
+    <div>杰倫還剩下：<span id="remaining"></span></div>
+    <div>三年後會有多少錢：<span id="profit"></span></div>
+    <hr>
+    <title>Document</title>
+    <script>
+//低於10000，不借
+//1001~10000 年利率20%
+// 10001~100000 年利率15%
+// 100001 年率立10% //loan貸款
+var remainingMoney = 500000;
+var profit = 0; //收益
+var money;
+var interestRate = 1;//利率
+var input = document.querySelector('#input');
+var submitBtn = document.querySelector('#submit');
+var resultText = document.querySelector('#result');
+var oneYear = document.querySelector('#oneYear');
+var twoYears = document.querySelector('#twoYears');
+var threeYears = document.querySelector('#threeYears');
+var loanBtn = document.querySelector('#loanBtn');
+var remaining = document.querySelector('#remaining');
+var profit = document.querySelector('#profit');
+//loanBtn.disabled = true;//不借
+var peopleLoan;
+//預設50W
+remaining.textContent = remainingMoney;
+//試算
+function tryCalculate() {
+    peopleLoan = Number(input.value);
+    if (peopleLoan < 1001) {
+loanBtn.disabled = true;//按鈕鎖住
+resultText.innerHTML = "不借!";
+    } else if (peopleLoan > 1000 && peopleLoan < 10001) {
+loanBtn.disabled = false;
+resultText.innerHTML ='好吧 你可以借了';
+oneYear.innerHTML = peopleLoan * 1.2;
+twoYears.innerHTML = peopleLoan * 1.2 * 1.2;
+threeYears.innerHTML = peopleLoan * 1.2 * 1.2 * 1.2;
+return threeYears;
+    }else if(peopleLoan > 10000 && peopleLoan < 100001){
+loanBtn.disabled = false;
+resultText.innerHTML ='朋友 沒事吧~ 要不多借點？？？';
+oneYear.innerHTML = peopleLoan * 1.5;
+twoYears.innerHTML = peopleLoan * 1.5 * 1.5;
+threeYears.innerHTML = peopleLoan * 1.5 * 1.5 * 1.5;
+    }else if(peopleLoan > 100000 && peopleLoan < 500001){
+loanBtn.disabled = false;
+resultText.innerHTML ='這位朋友一看就是要做大事啊~ 666';
+oneYear.innerHTML = peopleLoan * 1.0;
+twoYears.innerHTML = peopleLoan * 1.0 * 1.0;
+threeYears.innerHTML = peopleLoan * 1.0 * 1.0 * 1.0;
+}else{
+    console.log("我們這裡是良心借貸，請勿搗亂，借貸金額最高至50W");
+}
+console.log(threeYears);
+}
+//利率
+function loanMoney() {
+    //先送出欲借貸金額
+    if(peopleLoan== undefined){
+console.log("請先送出借貸金額!")
+    }else{
+//債主本金扣除借貸金額
+remainingMoney -= peopleLoan;
+remaining.textContent =remainingMoney;
+//三年後金額     扣除後本金 還款本金+利率
+profit.innerHTML = Number(remaining.textContent) + Number(threeYears.textContent);
+//本金
+remainingMoney = Number(profit.textContent);
+    }
+}
+
+loanBtn.addEventListener('click', loanMoney, false);
+submitBtn.addEventListener('click', tryCalculate, false);
+var a = `<li></li>`
+    </script>
+</body>
+
+</html>

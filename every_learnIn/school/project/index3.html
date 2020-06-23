@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #display{
+    height: 16px;
+  }
+</style>
+<body>
+  
+
+  <div id="display"></div>
+  <hr/>
+  <div>
+    <button class="number">0</button>
+    <button class="number">1</button>
+    <button class="number">2</button>
+    <button class="number">3</button>
+    <button class="number">4</button>
+    <button class="number">5</button>
+    <button class="number">6</button>
+    <button class="number">7</button>
+    <button class="number">8</button>
+    <button class="number">9</button>
+  </div>
+  <div>
+    <button class="operation">+</button>
+    <button class="operation">-</button>
+    <button class="operation">*</button>
+    <button class="operation">/</button>
+  </div>
+  <button id="answer">Answer</button>
+  <button id="memoryClean">AC</button>
+  <script>
+    var firstNumber = '';
+    var scendNumber = '';
+    var operation = '';
+
+    var numberList = document.querySelectorAll('.number');//取得所有的number的第一個按鈕
+    numberList.forEach(button => button.addEventListener('click',addNumber,false));//觸發數字按鈕時，選擇此按鈕代表數字填入addNumber
+
+    var operationList = document.querySelectorAll('.operation');//+-*/
+    operationList.forEach(button => button.addEventListener('click',addOperation,false));//選擇並填入
+
+    var display = document.querySelector('#display')
+    var answerBtn = document.querySelector('#answer');//答案
+    answerBtn.addEventListener('click',count,false);//點擊 取得計算總值
+    
+    var memoryCleanBtn = document.querySelector('#memoryClean');//龜苓摟
+    memoryCleanBtn.addEventListener('click',cleanMemory,false);//點擊 觸發龜苓膏事件
+
+    //按鈕事件觸發
+    if(!operation){
+        firstNumber += number;
+      }else{
+        scendNumber += number;
+      }
+      var string = `${firstNumber} ${operation} ${scendNumber}`;
+      display.innerHTML = string;
+
+
+    function addNumber(e){
+      var number = e.target.innerHTML;
+      if(!operation){
+        firstNumber += number;
+      }else{
+        scendNumber += number;
+      }
+      var string = `${firstNumber} ${operation} ${scendNumber}`;
+      display.innerHTML = string;
+    }
+
+    function count(){
+      display.innerHTML =eval(display.textContent);
+      firstNumber = display.textContent;
+      operation ='';
+      scendNumber ='';
+      console.log(firstNumber);
+    }
+    
+    function addOperation(e){
+      operation = e.target.textContent;
+    }
+    function cleanMemory(){
+      display.textContent = '龜苓～';
+      firstNumber = '';
+      operation ='';
+      scendNumber ='';
+    }
+  </script>
+</body>
+</html>
+<!---
+if(e.target !=operation){
+  firstNumber += number;
+}else if( (number = "+") || (number = "-") || (number = "*") || (number = "/")){
+  operation += number;
+}else{
+  scendNumber += number;
+}
+console.log(operation);
+var string = `${firstNumber} ${operation} ${scendNumber}`;
+document.querySelector('#display').innerHTML = string;
+console.log(typeof(string));
+
+
+
+      firstNumberValue = parseInt(firstNumber,10);
+      scendNumberValue = parseInt(scendNumber,10);
+      document.querySelector('#display').innerHTML = `${firstNumberValue}${operation}${scendNumberValue}`
+      console.log(firstNumberValue,scendNumberValue,operation);
+
+-->

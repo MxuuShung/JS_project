@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" id="mingInput">
+<button id="mingBtn">小明發出訊息</button>
+<div>小明收到的訊息：<span id="mingMsg"></span></div>
+<hr>
+<input type="text" id="jayInput">
+<button id="jayBtn">杰倫發出訊息</button>
+<div>杰倫收到的訊息：<span id="jayMsg"></span></div>
+<script>
+    //ming
+    var mingInputEl = document.querySelector('#mingInput');
+    var mingEl = document.querySelector('#mingBtn');
+    var mingOutputEl = document.querySelector('#mingMsg');
+    //jay
+    var jayInputEl = document.querySelector('#jayInput');
+    var jayEl = document.querySelector('#jayBtn');
+    var jayOutputEl = document.querySelector('#jayMsg');
+    
+    //函式
+    function clickBtn(e){
+        const btnEl =e.target.getAttribute("id");
+        switch(btnEl){
+            case 'mingBtn':
+                jayOutputEl.innerHTML = mingInputEl.value;
+                break;
+            case 'jayBtn':
+                mingOutputEl.textContent = jayInputEl.value;
+                break;
+            default:
+                break;
+        }
+    }
+    //監聽
+    mingEl.addEventListener('click',clickBtn,false);
+    jayEl.addEventListener('click',clickBtn,false);
+</script>
+</body>
+</html>
+

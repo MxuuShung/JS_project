@@ -1,0 +1,8 @@
+/*一開始並無strId這個屬性，利用JS新增進去，並讓style運作*/
+/*#strId{
+    color: blue;
+    font-size: 48px;
+}*/
+.blue{
+    color: blue;
+}

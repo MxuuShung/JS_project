@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<input type="number" id="input">
+<button id="addMoney">小明增加錢</button>
+<button id="reduceMoney">小明扣錢</button>
+<div>小明現在有的錢：<span id="mingMoney"></span></div>
+<hr>
+
+<script>
+
+//型別轉換
+var mingMoney = document.querySelector('#mingMoney');
+var addMoneyBtn = document.querySelector('#addMoney');
+var reduceMoneyBtn = document.querySelector('#reduceMoney');
+var input = document.querySelector('#input');
+
+if(mingMoney.textContent ==''){
+    mingMoney.textContent =1000;
+}
+addMoneyBtn.addEventListener('click',changeMoney,false);
+reduceMoneyBtn.addEventListener('click',changeMoney,false);
+function changeMoney(e){
+    let el = e.target.getAttribute("id");
+    if((Number(mingMoney.textContent)-Number(input.value))>0){
+    switch(el){
+            case 'addMoney':
+            mingMoney.textContent = Number(mingMoney.textContent)+Number(input.value);
+
+                break;
+            case 'reduceMoney':
+            mingMoney.textContent = Number(mingMoney.textContent)-Number(input.value);
+                break;
+            default:
+                break;
+        }
+    }else{
+        mingMoney.textContent =0;
+        alert("沒錢扣拉~ 給點活路啊~ 大人");
+    }
+}
+
+function addMoney() {
+    mingMoney.textContent = Number(mingMoney.textContent)+Number(input.value);
+    console.log(mingMoney);
+    console.log(input.value);
+    console.log(mingMoney.textContent);
+}
+function reduceMoney() {
+    if((Number(mingMoney.textContent)-Number(input.value))>0){
+        mingMoney.textContent = Number(mingMoney.textContent)-Number(input.value);
+    }else{
+        mingMoney.textContent =0;
+        alert("沒錢扣拉~ 給點活路啊~ 大人");
+    }
+}
+addMoneyBtn.addEventListener('click',addMoney,false);
+reduceMoneyBtn.addEventListener('click',reduceMoney,false);
+
+
+
+
+//英雄挑戰
+addMoneyBtn.addEventListener('click',changeMoney,false);
+reduceMoneyBtn.addEventListener('click',changeMoney,false);
+function changeMoney(e){
+    let el = e.target.getAttribute("id");
+    if((Number(mingMoney.textContent)-Number(input.value))>0){
+    switch(el){
+            case 'addMoney':
+            mingMoney.textContent = Number(mingMoney.textContent)+Number(input.value);
+
+                break;
+            case 'reduceMoney':
+            mingMoney.textContent = Number(mingMoney.textContent)-Number(input.value);
+                break;
+            default:
+                break;
+        }
+    }else{
+        mingMoney.textContent =0;
+        alert("沒錢扣拉~ 給點活路啊~ 大人");
+    }
+}
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    ## 6/23：Day 12
+透過 Let, Const 穩定自己的思緒後，小明開始體驗更為強力的 ES6 JS 語法，小美提到可以試著將複雜的 JavaScript 函式透過箭頭的方式進行簡化。
+
+小明：什麼！箭頭也能當函式？
+小美：沒錯，正確的運用下可以省略相當多的符號，將其濃縮成一行
+小美：箭頭函式的運用技巧如下：
+```js
+ // 傳統函式
+function saySomething(string) {
+  return '接招 ' + string; 
+}
+
+// 轉成箭頭函式
+const saySomething = (string) => {
+  return '接招 ' + string;
+}
+
+// 當只有單行表達式時，可同時省略 return 及 {}
+// 省略後依然保有回傳的特質
+const saySomething = (string) => '接招 ' + string;
+console.log(saySomething('Go Go Power Ranger'));
+
+// 當只有單一個參數時，可以省略參數外部的 ()
+// 沒有參數、兩個以上都不能省略
+const saySomething = string => '接招 ' + string;
+console.log(saySomething('Go Go Power Ranger'));
+```
+> 箭頭函式也可參考課程提供的[影音教學](https://courses.hexschool.com/courses/670037/lectures/12364949)
+
+任務：將以下的函式簡化（不影響結果的情況下進行最大簡化）
+*/
+// 題目：1
+var c;
+const sum = (a, b) => c = a + b;
+console.log(sum(5, 6));
+console.log(c);
+
+// 題目：2
+const square = num =>num * num;
+var d = square(5);
+console.log(d);
+
+// 題目：3
+setTimeout((()=>console.log('延遲 10 毫秒')), 10);
+
+// 題目：4
+var arr = [1, 2, 3];
+var arr2 = arr.map(item =>item * 2);
+console.log(arr2);
+
+// 題目：5
+var obj = {
+  fn: fn2 = a => a * a
+}
+console.log(obj.fn(10));
+console.log(obj.fn);
+  </script>
+</body>
+</html>

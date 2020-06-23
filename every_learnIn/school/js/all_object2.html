@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //物件與純值
+        var family = {};
+        family.name = '小名家';
+
+        //新增一個字串
+        var newString = '小名家';
+        //在字串內容下新增一個name
+        newString.name = '小名';
+        console.log(newString);
+        //純值無法新增屬性
+
+        //使用建構式方式新增屬性
+        //而使用建構式所建立的字串不是純值
+        //如果一個值沒辦法新增屬性時，他就是純值
+        //如果一個值可以新增屬性，他就是物件
+        var newString2 = new String('小名家');
+        newString2.name = '小名';
+        console.log(newString2);
+    </script>
+</body>
+</html>

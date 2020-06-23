@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .key{
+        font-size: 0;
+        display: flex;
+    }
+    .keyItem{
+        width: 300px;
+    }
+</style>
+<body>
+    <div class="key">
+        <!--  區塊一  -->
+        <div class="keyItem keyItem1" >
+            <img src="https://hexschool.github.io/JSTraining/stage12/4.png" alt="">
+        </div>
+        <!--  區塊二  -->
+        <div class="keyItem keyItem2">
+            <img src="https://hexschool.github.io/JSTraining/stage12/2.png" alt="">
+        </div>
+    </div>
+    <div class="key">
+        <!-- 區塊三 -->
+        <div class="keyItem keyItem3">
+            
+        </div>
+        <!-- 區塊四 -->
+        <div class="keyItem keyItem4" style="">
+            
+        </div>
+    </div>
+    <script>
+        //day12
+        var areaOne = document.querySelector('.keyItem1 img');
+        var areaThree = document.querySelector('.keyItem3');
+        var areaFour = document.querySelector('.keyItem4');
+        //setAttribute 設定屬性
+        areaOne.setAttribute('src','https://hexschool.github.io/JSTraining/stage12/1.png');
+        areaThree.innerHTML ='<img src="https://hexschool.github.io/JSTraining/stage12/3.png">';
+        console.log(areaFour.style);
+        areaFour.style.backgroundImage = "url('https://hexschool.github.io/JSTraining/stage12/4.png')";
+        //3345678
+    </script>
+    
+</body>
+</html>
